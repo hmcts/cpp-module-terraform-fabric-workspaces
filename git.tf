@@ -10,7 +10,8 @@ resource "fabric_workspace_git" "github" {
   }
 }
 
-# The documentation for these values does not exist and was reverse engineered from source, and from the API documentation.
+# The documentation for these values does not exist and was reverse engineered from source, and from the API documentation. 
+# The fabric_workspace_git resource is in preview, this may change or break with no notice.
 # https://learn.microsoft.com/en-us/fabric/cicd/git-integration/git-automation?tabs=user%2Cgithub#get-or-create-git-provider-credentials-connection
 # https://github.com/microsoft/terraform-provider-fabric/blob/main/internal/services/connection/resource_connection.go
 # https://github.com/microsoft/terraform-provider-fabric/blob/main/internal/services/connection/models.go
@@ -42,4 +43,16 @@ resource "fabric_connection" "github_connection" {
 }
 
 # TODO
-# Add fabric_connection_role for everyone who is given access to the workspace.
+# Add fabric_connection_role for everyone who is given access to the workspace
+# Does not support PrincipalType=EntireTenant
+# Does not support adding Owner roles 
+resource "fabric_connection_role_assignment" "role" {
+  count         = var.role_assignments
+  connection_id = fabric_connection.github_connection.id
+  role          = "User"
+
+  principal = {
+    id   = var.role_assignments[count.index].principal.id
+    type = var.role_assignments[count.index].principal.type
+  }
+}
