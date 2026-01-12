@@ -31,11 +31,11 @@ variable "description" {
   }
 }
 
-variable "capacity_id" {
-  description = "ID of the capacity this workspace is going in to"
-  type        = string
-  nullable    = false
-}
+# variable "capacity_id" {
+#   description = "ID of the capacity this workspace is going in to"
+#   type        = string
+#   nullable    = false
+# }
 
 variable "capacity_name" {
   description = "Display name of the capacity this workspace is assigned to"
@@ -113,6 +113,6 @@ variable "git_integration" {
       ["GitHub"],
       var.git_integration.git_provider_details.git_provider_type
     )
-    error_message = "git_provider_type must be 'GitHub'. Azure DevOps is not implemented at this time."
+    error_message = "git_provider_type must be 'GitHub'. Azure DevOps is not supported at this time."
   }
 }

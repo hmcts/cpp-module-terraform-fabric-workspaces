@@ -42,13 +42,12 @@ resource "fabric_connection" "github_connection" {
   }
 }
 
-# TODO
 # Add fabric_connection_role for everyone who is given access to the workspace
 # Does not support PrincipalType=EntireTenant
 # Does not support adding Owner roles 
 resource "fabric_connection_role_assignment" "role" {
   count         = var.role_assignments
-  connection_id = fabric_connection.github_connection.id
+  connection_id = fabric_connection.github_connection[0].id
   role          = "User"
 
   principal = {
