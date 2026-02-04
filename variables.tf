@@ -109,7 +109,7 @@ variable "git_integration" {
   }
 
   validation {
-    condition = var.git_integration == null || contains(
+    condition = var.git_integration == null ? true : contains(
       ["GitHub"],
       var.git_integration.git_provider_details.git_provider_type
     )
