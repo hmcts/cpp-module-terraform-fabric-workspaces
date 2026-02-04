@@ -46,7 +46,7 @@ resource "fabric_connection" "github_connection" {
 # Does not support PrincipalType=EntireTenant
 # Does not support adding Owner roles 
 resource "fabric_connection_role_assignment" "role" {
-  count         = var.role_assignments
+  count         = var.git_integration != null ? length(var.role_assignments) : 0
   connection_id = fabric_connection.github_connection[0].id
   role          = "User"
 
