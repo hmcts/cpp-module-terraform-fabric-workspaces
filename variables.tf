@@ -104,7 +104,7 @@ variable "git_integration" {
   default  = null
 
   validation {
-    condition     = var.git_integration == null || contains(["PreferWorkspace", "PreferGit"], var.git_integration.initialization_strategy)
+    condition     = var.git_integration == null ? true : contains(["PreferWorkspace", "PreferGit"], var.git_integration.initialization_strategy)
     error_message = "initialization_strategy must be either 'PreferWorkspace' or 'PreferGit'."
   }
 
