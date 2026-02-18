@@ -17,3 +17,8 @@ output "capacity_id" {
   description = "The capacity ID this workspace is assigned to"
   value       = fabric_workspace.workspace.capacity_id
 }
+
+output "principal_id" {
+  description = "The workspace's system-assigned managed identity"
+  value       = fabric_workspace.workspace.identity.principal_id
+}
